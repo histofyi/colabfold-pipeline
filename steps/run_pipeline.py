@@ -11,7 +11,7 @@ def run_pipeline(**kwargs) -> Dict:
 
     pipeline.load_steps(steps)
 
-    #pipeline.run_step('1')  # update_localpdb
+    pipeline.run_step('1')  # run_class_i_allele_prediction
     
     action_logs = pipeline.finalise()
 

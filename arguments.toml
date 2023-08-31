@@ -1,0 +1,38 @@
+"PROG" = "Colabfold Pipeline"
+"DESCRIPTION" = "This pipeline builds a dataset MHC structure predictions using Colabfold."
+"EPILOG" = "For more information see - https = //github.com/histofyi/colabfold_pipeline"
+
+[ARGUMENTS.VERBOSE]
+"FLAG" = "v"
+"VARIABLE_NAME" = "verbose"
+"HELP" = "increases output verbosity (non-verbosity is the default)"
+"ACTION" = "store_true"
+"DEFAULT" = false
+
+[ARGUMENTS.FORCE]
+"FLAG" = "f"
+"VARIABLE_NAME" = "force"
+"HELP" = "forces reloading of underlying datasets (not forcing reload is the default)"
+"ACTION" = "store_true"
+"DEFAULT" = false
+
+[ARGUMENTS.RELEASE]
+"FLAG" = "r"
+"VARIABLE_NAME" = "release"
+"HELP" = "switch between development and release modes (development mode is the default)"
+"ACTION" = "store_true"
+"DEFAULT" = false
+
+[ARGUMENTS.ALL_DATA]
+"FLAG" = "a"
+"VARIABLE_NAME" = "all_data"
+"HELP" = "whether all data should be processed or only new structures"
+"ACTION" = "store_true"
+"DEFAULT" = false
+
+[ARGUMENTS.MHC_CLASS]
+"FLAG" = "m"
+"VARIABLE_NAME" = "mhc_class"
+"HELP" = "switch the pipeline between MHC Class I and Class II currently only Class I to which it defaults"
+"ACTION" = "store"
+"DEFAULT" = "class_i"

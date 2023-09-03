@@ -26,26 +26,32 @@ def run_class_i_allele_prediction_action(**action_args) -> Tuple[bool, Dict, Lis
     
     allele_slug = item['allele_slug']
 
-    sequence = f"{alpha_chain}:{beta2m}"
-
-    fasta_file = f">{item['allele_slug']}\n{sequence}\n"
-    tmp_fasta_file = f"{action_args['config']['PATHS']['TMP_PATH']}/{action_args['config']['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}.fasta"
-
-    write_file(tmp_fasta_file, fasta_file, verbose)
-
-    output_folder = f"{output_path}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}"
-
-    create_folder(output_folder, verbose)
-
-    if not os.path.exists(f"{output_folder}/{allele_slug}.done.txt"):
-
-        localcolabfold_command = f"colabfold_batch {tmp_fasta_file} {output_folder}/ --num-recycle 3 --random-seed 42 --amber --use-gpu-relax"
-
-        os.system(localcolabfold_command)
-
-        print (localcolabfold_command)
+    if '-' not in alpha_chain:
+        sequence = f"{alpha_chain}:{beta2m}"
     else:
-        print (f"Skipping {allele_slug}, it already exists")
+        sequence = None
+
+    if sequence:
+        fasta_file = f">{item['allele_slug']}\n{sequence}\n"
+        tmp_fasta_file = f"{action_args['config']['PATHS']['TMP_PATH']}/{action_args['config']['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}.fasta"
+
+        write_file(tmp_fasta_file, fasta_file, verbose)
+
+        output_folder = f"{output_path}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}"
+
+        create_folder(output_folder, verbose)
+
+        if not os.path.exists(f"{output_folder}/{allele_slug}.done.txt"):
+
+            localcolabfold_command = f"colabfold_batch {tmp_fasta_file} {output_folder}/ --num-recycle 3 --random-seed 42 --amber --use-gpu-relax"
+
+            os.system(localcolabfold_command)
+
+            print (localcolabfold_command)
+        else:
+            print (f"Skipping {allele_slug}, it already exists")
+    else:
+        print (f"Skipping {allele_slug}, it has a '-' in the sequence")
 
     data, success, errors = do_something(item)
 
@@ -63,7 +69,7 @@ def run_class_i_allele_prediction(**kwargs):
     config = kwargs['config']
     new_work = []
 
-    locus = 'hla_f'
+    locus = 'hla_a'
 
     create_folder(f"{config['PATHS']['TMP_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}//{locus}", verbose)
     create_folder(f"{config['PATHS']['OUTPUT_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{locus}", verbose)
@@ -79,6 +85,7 @@ def run_class_i_allele_prediction(**kwargs):
 
         new_work.append(allele_record)
 
+    
     action_output = do_work(new_work, run_class_i_allele_prediction_action, kwargs=kwargs)
 
     return action_output

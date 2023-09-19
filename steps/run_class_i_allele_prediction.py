@@ -7,10 +7,6 @@ from helpers.files import read_json, write_json, create_folder, write_file
 from pipeline_specific_helpers import do_work
 
 
-def do_something(item:str) -> Tuple[Dict, bool, List]:
-    return None, None, None
-
-
 def run_class_i_allele_prediction_action(**action_args) -> Tuple[bool, Dict, List]:
 
     output_path = action_args['output_path']
@@ -56,8 +52,6 @@ def run_class_i_allele_prediction_action(**action_args) -> Tuple[bool, Dict, Lis
     data, success, errors = do_something(item)
 
     if success:
-        # do something here
-
         return (True, {}, None)
     else:
         return (False, None, ['unable to do something'])
@@ -71,7 +65,7 @@ def run_class_i_allele_prediction(**kwargs):
 
     locus = 'hla_a'
 
-    create_folder(f"{config['PATHS']['TMP_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}//{locus}", verbose)
+    create_folder(f"{config['PATHS']['TMP_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{locus}", verbose)
     create_folder(f"{config['PATHS']['OUTPUT_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{locus}", verbose)
 
     locus_file_name = f"{config['PATHS']['WAREHOUSE_PATH']}/alleles/processed_data/protein_alleles/{locus}.json"

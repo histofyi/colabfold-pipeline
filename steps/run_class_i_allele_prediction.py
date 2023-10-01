@@ -28,8 +28,11 @@ def run_class_i_allele_prediction_action(**action_args) -> Tuple[bool, Dict, Lis
 
     if '-' not in alpha_chain:
         sequence = f"{alpha_chain}:{beta2m}"
-    else:
         sequence = None
+        nter = ''
+    else:
+        sequence = sequence = f"{alpha_chain.replace('-','')}:{beta2m}"
+        nter = 'n'
 
     if sequence:
         fasta_file = f">{item['allele_slug']}\n{sequence}\n"
@@ -37,7 +40,7 @@ def run_class_i_allele_prediction_action(**action_args) -> Tuple[bool, Dict, Lis
 
         write_file(tmp_fasta_file, fasta_file, verbose)
 
-        output_folder = f"{output_path}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}"
+        output_folder = f"{output_path}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{item['locus_slug']}/{item['allele_slug']}{nter}"
 
         create_folder(output_folder, verbose)
 
@@ -69,7 +72,7 @@ def run_class_i_allele_prediction(**kwargs):
     config = kwargs['config']
     new_work = []
 
-    locus = 'hla_a'
+    locus = 'hla_b'
 
     create_folder(f"{config['PATHS']['TMP_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}//{locus}", verbose)
     create_folder(f"{config['PATHS']['OUTPUT_PATH']}/{config['PATHS']['PIPELINE_WAREHOUSE_FOLDER']}/{locus}", verbose)
@@ -85,6 +88,8 @@ def run_class_i_allele_prediction(**kwargs):
 
         new_work.append(allele_record)
 
+    print (len(new_work))
+    #new_work = new_work[3000:]
     
     action_output = do_work(new_work, run_class_i_allele_prediction_action, kwargs=kwargs)
 

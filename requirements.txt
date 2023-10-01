@@ -1,19 +1,35 @@
-certifi==2023.7.22
-charset-normalizer==3.2.0
+brotlipy==0.7.0
+certifi @ file:///croot/certifi_1690232220950/work/certifi
+cffi @ file:///croot/cffi_1670423208954/work
+charset-normalizer @ file:///tmp/build/80754af9/charset-normalizer_1630003229654/work
+cryptography @ file:///croot/cryptography_1694444244250/work
 dparse==0.6.3
 gitdb==4.0.10
-GitPython==3.1.32
+GitPython==3.1.36
+h5py @ file:///tmp/abs_4aewd3wzey/croots/recipe/h5py_1659091371897/work
 -e git+https://github.com/histofyi/helpers.git@4228f4de7d381f18b0da4cafea6eb3e73fff0132#egg=helpers
-idna==3.4
+idna @ file:///croot/idna_1666125576474/work
 markdown-it-py==3.0.0
 mdurl==0.1.2
-packaging==23.1
--e git+https://github.com/histofyi/pipeline.git@9222d4354f868e494ed03fd6f6a8be725efa3bc0#egg=pipeline
+mkl-fft @ file:///croot/mkl_fft_1695058164594/work
+mkl-random @ file:///croot/mkl_random_1695059800811/work
+mkl-service==2.4.0
+numpy @ file:///work/mkl/numpy_and_numpy_base_1682953417311/work
+packaging @ file:///croot/packaging_1693575174725/work
+Pillow==9.4.0
+-e git+https://github.com/histofyi/pipeline.git@37bab622452b32d74ba7782c9f460e9b34051214#egg=pipeline
+ply==3.11
+pycparser @ file:///tmp/build/80754af9/pycparser_1636541352034/work
 Pygments==2.16.1
-requests==2.31.0
-rich==13.5.2
-smmap==5.0.0
-toml==0.10.2
+pymol==2.4.1
+pyOpenSSL @ file:///croot/pyopenssl_1690223430423/work
+PyQt5-sip==12.11.0
+PySocks @ file:///tmp/build/80754af9/pysocks_1605305779399/work
+requests @ file:///croot/requests_1690400202158/work
+rich==13.5.3
+sip @ file:///tmp/abs_44cd77b_pu/croots/recipe/sip_1659012365470/work
+smmap==5.0.1
+toml @ file:///tmp/build/80754af9/toml_1616166611790/work
 tomli==2.0.1
-typing_extensions==4.7.1
-urllib3==2.0.4
+typing_extensions==4.8.0
+urllib3 @ file:///croot/urllib3_1686163155763/work
